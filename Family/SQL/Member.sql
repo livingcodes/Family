@@ -1,0 +1,9 @@
+CREATE TABLE Member (
+	Id INT PRIMARY KEY IDENTITY(1,1),
+	FirstName VARCHAR(62),
+	MiddleName VARCHAR(62),
+	LastName VARCHAR(62),
+	DisplayName VARCHAR(30),
+	Dob DATETIME,
+	Note VARCHAR(2000)
+)

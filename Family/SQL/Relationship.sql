@@ -1,0 +1,7 @@
+CREATE TABLE Relationship (
+	Id INT PRIMARY KEY IDENTITY(1,1),
+	MemberId INT NOT NULL,
+	RelationshipId INT NOT NULL,
+	[Type] VARCHAR(30) NOT NULL,
+	Note VARCHAR(2000)
+)
