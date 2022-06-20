@@ -1,15 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-
-namespace Family.Pages;
-public class PrivacyModel : PageModel {
-   private readonly ILogger<PrivacyModel> _logger;
-
-   public PrivacyModel(ILogger<PrivacyModel> logger) {
-      _logger = logger;
-   }
-
+﻿namespace Family.Pages;
+public class PrivacyModel : BasePage {
+   public List<Member> Members;
    public void OnGet() {
+      log.Debug("Privacy test log");
+      Members = db.Select<Member>("ORDER BY DisplayName");
    }
 }
-
