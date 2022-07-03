@@ -8,7 +8,9 @@
    <ul>
       @foreach (var member in Model.Members) {
       <li>
-         @member.DisplayName
+         <a href="/member?id=@member.Id">
+            @member.DisplayName
+         </a>
       </li>
       }
    </ul>

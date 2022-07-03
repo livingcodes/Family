@@ -1,0 +1,42 @@
+﻿@page
+@model Family.Pages.MemberModel
+@{
+}
+<form method="post">
+   <div>
+      <label asp-for="Member.Id">ID</label>
+      <input type="text" asp-for="Member.Id" readonly>
+   </div>
+
+   <div>
+      <label asp-for="Member.FirstName">First Name</label>
+      <input type="text" asp-for="Member.FirstName" />
+   </div>
+
+   <div>
+      <label asp-for="Member.MiddleName">Middle Name</label>
+      <input type="text" asp-for="Member.MiddleName" />
+   </div>
+
+   <div>
+      <label asp-for="Member.LastName">Last Name</label>
+      <input type="text" asp-for="Member.LastName" />
+   </div>
+
+   <div>
+      <label asp-for="Member.DisplayName">Display Name</label>
+      <input type="text" asp-for="Member.DisplayName" />
+   </div>
+
+   <div>
+      <label asp-for="Member.Dob">DOB</label>
+      <input type="date" asp-for="Member.Dob" />
+   </div>
+
+   <div>
+      <label asp-for="Member.Note">Note</label>
+      <textarea asp-for="Member.Note"></textarea>
+   </div>
+
+   <input type="submit" value="Save" />
+</form>
