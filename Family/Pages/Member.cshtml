@@ -37,5 +37,15 @@
       <textarea asp-for="Member.Note"></textarea>
    </div>
 
+   <div>
+      <label asp-for="Member.DateCreated">Date Created</label>
+      <input asp-for="Member.DateCreated" readonly>
+   </div>
+
+   <div>
+      <label asp-for="Member.DateModified">Date Modified</label>
+      <input asp-for="Member.DateModified" readonly>
+   </div>
+
    <input type="submit" value="Save" />
 </form>

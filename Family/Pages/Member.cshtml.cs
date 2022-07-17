@@ -18,8 +18,10 @@ public class MemberModel : BasePage
       var member = db.SelectById<Member>(Member.Id);
       if (member == null)
          (Member.Id, _) = db.Insert(Member);
-      else
+      else {
+         Member.DateModified = DateTime.Now;
          db.Update(Member);
+      }
       Response.Redirect("/");
    }
 }

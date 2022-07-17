@@ -5,5 +5,7 @@ CREATE TABLE Member (
 	LastName VARCHAR(62),
 	DisplayName VARCHAR(30),
 	Dob DATETIME,
-	Note VARCHAR(2000)
+	Note VARCHAR(2000),
+	DateCreated DATETIME NOT NULL DEFAULT GETDATE(),
+	DateModified DATETIME
 )

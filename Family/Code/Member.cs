@@ -7,4 +7,6 @@ public class Member {
    public string DisplayName { get; set; }
    public DateTime? Dob { get; set; }
    public string Note { get; set; }
+   public DateTime DateCreated { get; set; }
+   public DateTime? DateModified { get; set; }
 }
