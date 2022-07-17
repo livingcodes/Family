@@ -1,0 +1,65 @@
+﻿@page
+@model Family.Pages.TreeModel
+<style>
+   #tree{border:1px solid orange; position:relative; width:800px; height:400px;}
+   div.member{width:100px; height:60px; text-align:center; 
+      border:1px solid #ddd; position:absolute;}
+</style>
+<h1>Tree</h1>
+<div>
+   <h2>Members</h2>
+   @foreach (var member in Model.Members) {
+      <div id="id@(member.Id)" draggable="true" onclick="add(this)">
+         @member.DisplayName
+      </div>
+   }
+</div>
+<div>
+   <h2>Tree</h2>
+   <div id="tree" ondragover="over(event)" ondrop="drop(event)"></div>
+</div>
+
+@section Scripts {
+<script>
+class Member {
+   constructor(x, y, name, id) {
+      this.x = x;
+      this.y = y;
+      this.name = name;
+      this.id = id;
+   }
+   draw() {
+      var tree = document.getElementById('tree');
+      var span = document.createElement('span');
+      span.innerText = this.name;
+      var div = document.createElement('div');
+      div.setAttribute('class', 'member');
+      div.setAttribute('draggable', 'true');
+      div.setAttribute('ondragstart', 'drag(event)');
+      div.setAttribute('data-id', this.id);
+      div.appendChild(span);
+      tree.appendChild(div);
+   }
+}
+function add(el) {
+   var name = el.innerText;
+   var member = new Member(10, 10, name, el.id);
+   member.draw();
+}
+function drag(e) {
+   e.dataTransfer.setData('text', e.target.attributes["data-id"].value);
+}
+function drop(e) {
+   var id = e.dataTransfer.getData('text');
+   var el = document.querySelector('[data-id="'+id+'"]');
+   var rect = document.querySelector('#tree').getBoundingClientRect();
+   var y = Math.round(rect.y);
+   var x = Math.round(rect.x);
+   el.style.left = (e.x - x)+'px';
+   el.style.top = (e.y - y)+'px';
+}
+function over(e) {
+   e.preventDefault();
+}
+</script>
+}
