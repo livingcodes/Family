@@ -38,6 +38,7 @@ class Member {
       div.setAttribute('class', 'member');
       div.setAttribute('draggable', 'true');
       div.setAttribute('ondragstart', 'drag(event)');
+      div.setAttribute('ondblclick', 'dblclick(event)');
       div.setAttribute('data-id', this.id);
       div.appendChild(span);
       tree.appendChild(div);
@@ -59,6 +60,14 @@ function drop(e) {
    var x = Math.round(rect.x);
    el.style.left = (e.x - x)+'px';
    el.style.top = (e.y - y)+'px';
+}
+function dblclick(e) {
+   var id = e.target.getAttribute("data-id");
+   if (id == null)
+      id = e.target.parentElement.getAttribute("data-id");
+   console.log(id);
+   if (id > 0)
+      window.open("/treeitem?id="+id, "_blank");
 }
 function over(e) {
    e.preventDefault();
