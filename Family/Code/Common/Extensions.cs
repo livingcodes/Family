@@ -9,4 +9,9 @@ public static class Extensions {
          int.TryParse(text, out int result)
             ? result
             : @default;
+
+   public static bool IsSet(this string text) =>
+      text != null && text != "";
+
+   public static bool NotSet(this string text) => !text.IsSet();
 }

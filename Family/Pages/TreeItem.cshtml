@@ -1,0 +1,43 @@
+﻿@page
+@model Family.Pages.TreeItemModel
+<h1>Tree Item</h1>
+<form method="post">
+<div>
+   <label asp-for="TreeItem.Id">ID</label>
+   <input type="text" asp-for="TreeItem.Id" readonly />
+</div>
+
+<div>
+   <label asp-for="TreeItem.TreeId">Tree ID</label>
+   <input type="text" asp-for="TreeItem.TreeId" />
+</div>
+
+<div>
+   <label asp-for="TreeItem.MemberId">Member ID</label>
+   <input type="text" asp-for="TreeItem.MemberId" />
+</div>
+
+<div>
+   <label asp-for="TreeItem.X">X</label>
+   <input type="text" asp-for="TreeItem.X" />
+</div>
+
+<div>
+   <label asp-for="TreeItem.Y">Y</label>
+   <input type="text" asp-for="TreeItem.Y" />
+</div>
+
+<div>
+   <label asp-for="TreeItem.DateCreated">Date Created</label>
+   <input type="datetime" asp-for="TreeItem.DateCreated" readonly />
+</div>
+
+<div>
+   <label asp-for="TreeItem.DateModified">Date Modified</label>
+   <input type="datetime" asp-for="TreeItem.DateModified" readonly />
+</div>
+
+<div>
+   <input type="submit" value="Save" />
+</div>
+</form>
