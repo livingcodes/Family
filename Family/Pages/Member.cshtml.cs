@@ -16,9 +16,11 @@ public class MemberModel : BasePage
 
    public void OnPost() {
       var member = db.SelectById<Member>(Member.Id);
-      if (member == null)
+      if (member == null) {
+         Member.DateCreated = DateTime.Now;
+         Member.DateModified = Member.DateCreated;
          (Member.Id, _) = db.Insert(Member);
-      else {
+      } else {
          Member.DateModified = DateTime.Now;
          db.Update(Member);
       }
