@@ -49,3 +49,14 @@
 
    <input type="submit" value="Save" />
 </form>
+
+<h2>Relationships</h2>
+<ul>
+   @foreach (var relationship in Model.Relationships) {
+   <li>
+      @relationship.Name1
+      @relationship.Type
+      @relationship.Name2
+   </li>
+   }
+</ul>
