@@ -17,6 +17,6 @@ public class BasePage : PageModel {
 
    protected ILog log;
 
-   protected string GetQueryString(string key) =>
+   protected str qry(str key) =>
       Request.Query[key].FirstOrDefault();
 }

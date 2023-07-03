@@ -1,0 +1,13 @@
+﻿@model Vdn
+<div class="v">
+   @if (Model.msgs.cnt != 0) {
+   <ul>
+      @foreach (var msg in Model.msgs) {
+      <li class="@msg.lvl.str()">
+         @(msg.lvl.str()):
+         @msg.txt
+      </li>
+      }
+   </ul>
+   }
+</div>

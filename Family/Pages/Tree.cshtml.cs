@@ -4,18 +4,23 @@ public class TreeModel : BasePage
    public List<Member> Members = new();
    public Tree Tree = new();
    public List<Item> Items = new();
-   public string Json;
+   public str Json;
+   public Vdn vdn = new();
 
    public void OnGet() {
       Members = db.Select<Member>("ORDER BY Dob");
-      var treeId = 1;
+      var treeId = qry("id").@int(1);
       Tree = db.SelectById<Tree>(treeId);
+      if (Tree == null) {
+         vdn.err("Tree not found");
+         return;
+      }
       Items = db.Select<Item>(sql, treeId);
       Json = json(Items);
    }
 
-   string json(List<Item> items) {
-      string j = "[";
+   str json(List<Item> items) {
+      str j = "[";
       foreach (var item in items) {
          j += "{";
          j += $@"""{nameof(item.Id)}"": {item.Id}, ";
@@ -29,7 +34,7 @@ public class TreeModel : BasePage
       return j;
    }
 
-   string sql = @"
+   str sql = @"
 SELECT ti.Id, ti.X, ti.Y, m.DisplayName Title
 FROM Tree t
 JOIN TreeItem ti ON ti.TreeId = t.Id
@@ -38,6 +43,6 @@ WHERE t.Id = @Id
 ";
    public class Item {
       public int Id, X, Y;
-      public string Title;
+      public str Title;
    }
 }

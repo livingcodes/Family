@@ -3,7 +3,7 @@ public class TreeItemModel : BasePage
 {
    public TreeItem TreeItem { get; set; }
    public void OnGet() {
-      var id = GetQueryString("id").ToInt();
+      var id = qry("id").@int();
       TreeItem = db.SelectById<TreeItem>(id);
    }
    public void OnPost() {

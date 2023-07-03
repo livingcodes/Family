@@ -7,7 +7,7 @@ public class MemberModel : BasePage
    public List<Relationship> Relationships = new();
 
    public void OnGet() {
-      var id = GetQueryString("id").ToInt();
+      var id = qry("id").@int();
       if (id <= 0)
          return;
       Member = db.SelectById<Member>(id);

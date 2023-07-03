@@ -1,5 +1,5 @@
-﻿namespace Family.Code;
+﻿namespace Family;
 public class Relationship {
    public int MemberId, RelatedMemberId;
-   public string Type, Note;
+   public str Type, Note;
 }

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Family", "Family\Family.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basketcase", "..\Basketcase\Basketcase\Basketcase.csproj", "{6E207E60-172E-41F3-B458-476E8E203786}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Family.Tests", "Family.Tests\Family.Tests.csproj", "{232DEAC3-6BED-48F3-925C-6984156C8D5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6E207E60-172E-41F3-B458-476E8E203786}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E207E60-172E-41F3-B458-476E8E203786}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E207E60-172E-41F3-B458-476E8E203786}.Release|Any CPU.Build.0 = Release|Any CPU
+		{232DEAC3-6BED-48F3-925C-6984156C8D5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{232DEAC3-6BED-48F3-925C-6984156C8D5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{232DEAC3-6BED-48F3-925C-6984156C8D5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{232DEAC3-6BED-48F3-925C-6984156C8D5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

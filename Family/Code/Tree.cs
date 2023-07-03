@@ -1,7 +1,7 @@
 ﻿namespace Family;
 public class Tree {
    public int Id;
-   public string Title;
-   public DateTime DateCreated;
-   public DateTime? DateModified;
+   public str Title;
+   public dte DateCreated;
+   public dte? DateModified;
 }

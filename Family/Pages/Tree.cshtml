@@ -1,23 +1,27 @@
 ﻿@page
 @model Family.Pages.TreeModel
-<style>
-   #tree{border:1px solid orange; position:relative; width:800px; height:400px;}
-   div.member{width:100px; height:60px; text-align:center; 
-      border:1px solid #ddd; position:absolute;}
-</style>
+<partial name="_Vdn" model="Model.vdn" />
 <h1>Tree</h1>
 <div>
    <h2>Members</h2>
    @foreach (var member in Model.Members) {
-      <div id="id@(member.Id)" draggable="true" onclick="add(this)">
-         @member.DisplayName
-      </div>
+   <div id="id@(member.Id)" draggable="true" onclick="add(this)">
+      @member.DisplayName
+   </div>
    }
 </div>
 <div>
    <h2>@Model.Tree?.Title</h2>
    <div id="tree" ondragover="over(event)" ondrop="drop(event)"></div>
 </div>
+
+@section css {
+<style>
+   #tree{border:1px solid orange; position:relative; width:800px; height:400px;}
+   div.member{width:100px; height:60px; text-align:center; 
+      border:1px solid #ddd; position:absolute;}
+</style>
+}
 
 @section Scripts {
 <script>

@@ -1,17 +1,17 @@
 ﻿namespace Family.Common;
 public static class Extensions {
-   public static string ToStringOr(this object value, string ifNull) =>
-         value == null
-            ? ifNull
-            : value.ToString();
+   public static str str(this obj val, str ifNull) =>
+      val == null
+         ? ifNull
+         : val.ToString();
 
-   public static int ToInt(this string text, int @default = 0) =>
-         int.TryParse(text, out int result)
-            ? result
-            : @default;
+   public static int @int(this str text, int @default = 0) =>
+      int.TryParse(text, out int result)
+         ? result
+         : @default;
 
-   public static bool IsSet(this string text) =>
+   public static bln IsSet(this str text) =>
       text != null && text != "";
 
-   public static bool NotSet(this string text) => !text.IsSet();
+   public static bln NotSet(this str text) => !text.IsSet();
 }
