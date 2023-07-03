@@ -12,4 +12,7 @@ public class Db : Basketcase.Db {
    int hr = 60 * 60;
 
    public Basketcase.IDb Cache(string key) => Cache(key, 1 * hr);
+
+   public int exe(str sql, params obj[] prms) =>
+      Execute(sql, prms);
 }

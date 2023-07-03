@@ -4,20 +4,24 @@
 <h1>Tree</h1>
 <div>
    <h2>Members</h2>
-   @foreach (var member in Model.Members) {
-   <div id="id@(member.Id)" draggable="true" onclick="add(this)">
-      @member.DisplayName
+   <div class="members">
+      @foreach (var member in Model.Members) {
+      <div id="id@(member.Id)" draggable="true" onclick="add(this)">
+         @member.DisplayName
+      </div>
+      }
    </div>
-   }
 </div>
 <div>
    <h2>@Model.Tree?.Title</h2>
+   <a href="javascript:save()" class="btn">Save</a>
    <div id="tree" ondragover="over(event)" ondrop="drop(event)"></div>
 </div>
 
 @section css {
 <style>
    #tree{border:1px solid orange; position:relative; width:800px; height:400px;}
+   div.members{display:flex; flex-direction:column; flex-wrap:wrap; height:150px;}
    div.member{width:100px; height:60px; text-align:center; 
       border:1px solid #ddd; position:absolute;}
 </style>
@@ -48,6 +52,27 @@ class Member {
       tree.appendChild(div);
    }
 }
+class Api
+{
+   update(id, x, y) {
+      fetch("https://localhost:7105/api/tree/upd", {
+         method:"POST",
+         headers:{ "Content-Type":"application/json" },
+         body:JSON.stringify({
+            "id":id,
+            "x":x,
+            "y":y
+         })
+      })
+      .then(function(res) {
+         if (res.ok) {
+            console.log(res.statusText)
+         } else {
+            console.log(res.statusText)
+         }
+      })
+   }
+}
 function add(el) {
    var name = el.innerText;
    var member = new Member(10, 10, name, el.id);
@@ -76,7 +101,25 @@ function dblclick(e) {
 function over(e) {
    e.preventDefault();
 }
+function save() {
+   var tree = document.getElementById("tree");
+   var members = tree.querySelectorAll(".member");
+   var arr = [];
+   for (var i=0; i<members.length; i++) {
+      var id = members[i].getAttribute("data-id");
+      id = Number(id);
+      var x = members[i].style.left;
+      x = Number(x.replace("px", ""))
+      var y = members[i].style.top;
+      y = Number(y.replace("px", ""))
+      var item = {"id":id, "x":x, "y":y};
+      arr.push(item);
+      api.update(id, x, y);
+   }
+   console.log(arr);
+}
 var json = "";
+var api = new Api();
 window.onload = () => {
    json = @Html.Raw(Model.Json);
    for (var i=0; i<json.length; i++) {

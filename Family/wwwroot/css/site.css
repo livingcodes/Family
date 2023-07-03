@@ -3,8 +3,10 @@ html,body,main,section,header,footer,div,h1,h2,h3,h4,h5,h6,ul{
 }
 html{font-size:14px;}
 body{margin:10px 15px;}
+a.btn{display:inline-block; padding:8px 17px; border-radius:3px;
+   background-color:#2b4; color:white; text-decoration:none; }
 .v{border:1px solid #ccc;}
-.v li{border-left:5px solid red; padding:4px 7px; margin:5px; 
+.v li{border-left:5px solid red; padding:4px 7px; margin:5px;
    list-style:none;}
 .v li.error{border-left-color:red;}
 .v li.warning{border-left-color:orange;}
