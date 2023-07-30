@@ -40,7 +40,7 @@ SELECT ti.Id ItmId, ti.X, ti.Y, m.dn Title, ti.MemberId MbrId
 FROM Tree t
 JOIN TreeItem ti ON ti.TreeId = t.Id
 JOIN Member m ON m.id = ti.MemberId
-WHERE t.Id = @Id
+WHERE t.id = @id
 ";
   public class Item {
     public int ItmId, X, Y, MbrId;
