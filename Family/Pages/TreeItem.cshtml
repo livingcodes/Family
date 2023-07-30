@@ -3,41 +3,41 @@
 <h1>Tree Item</h1>
 <form method="post">
 <div>
-   <label asp-for="TreeItem.Id">ID</label>
-   <input type="text" asp-for="TreeItem.Id" readonly />
+  <label asp-for="itm.id">ID</label>
+  <input type="text" asp-for="itm.id" readonly />
 </div>
 
 <div>
-   <label asp-for="TreeItem.TreeId">Tree ID</label>
-   <input type="text" asp-for="TreeItem.TreeId" />
+  <label asp-for="itm.treeId">Tree ID</label>
+  <input type="text" asp-for="itm.treeId" />
 </div>
 
 <div>
-   <label asp-for="TreeItem.MemberId">Member ID</label>
-   <input type="text" asp-for="TreeItem.MemberId" />
+  <label asp-for="itm.mbrId">Member ID</label>
+  <input type="text" asp-for="itm.mbrId" />
 </div>
 
 <div>
-   <label asp-for="TreeItem.X">X</label>
-   <input type="text" asp-for="TreeItem.X" />
+  <label asp-for="itm.x">X</label>
+  <input type="text" asp-for="itm.x" />
 </div>
 
 <div>
-   <label asp-for="TreeItem.Y">Y</label>
-   <input type="text" asp-for="TreeItem.Y" />
+  <label asp-for="itm.y">Y</label>
+  <input type="text" asp-for="itm.y" />
 </div>
 
 <div>
-   <label asp-for="TreeItem.DateCreated">Date Created</label>
-   <input type="datetime" asp-for="TreeItem.DateCreated" readonly />
+  <label asp-for="itm.crt">Date Created</label>
+  <input type="datetime" asp-for="itm.crt" readonly />
 </div>
 
 <div>
-   <label asp-for="TreeItem.DateModified">Date Modified</label>
-   <input type="datetime" asp-for="TreeItem.DateModified" readonly />
+  <label asp-for="itm.upd">Date Modified</label>
+  <input type="datetime" asp-for="itm.upd" readonly />
 </div>
 
 <div>
-   <input type="submit" value="Save" />
+  <input type="submit" value="Save" />
 </div>
 </form>

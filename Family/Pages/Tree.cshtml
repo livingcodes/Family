@@ -67,10 +67,10 @@ class Api
   static dom = "https://localhost:7105/api/tree/";
   ins(treeId, mbrId, x, y) {
     post(`${Api.dom}ins`, {
-      TreeId:treeId,
-      MemberId:mbrId,
-      X:x,
-      Y:y
+      treeId:treeId,
+      mbrId:mbrId,
+      x:x,
+      y:y
     })
     .then(res => {
       console.log(res.status)
@@ -159,7 +159,7 @@ var api = new Api();
 window.onload = () => {
   jsn = @Html.Raw(Model.jsn);
   for (var i=0; i<jsn.length; i++) {
-    var m = new Member(jsn[i].X, jsn[i].Y, jsn[i].Title, jsn[i].ItmId, jsn[i].MbrId);
+    var m = new Member(jsn[i].x, jsn[i].y, jsn[i].title, jsn[i].itmId, jsn[i].mbrId);
     m.draw();
   }
 }

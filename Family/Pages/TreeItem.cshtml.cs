@@ -1,43 +1,44 @@
 namespace Family.Pages;
 public class TreeItemModel : BasePage
 {
-   public TreeItem TreeItem { get; set; }
-   public void OnGet() {
-      var id = qry("id").@int();
-      TreeItem = db.SelectById<TreeItem>(id);
-   }
-   public void OnPost() {
-      TreeItem = Request.GetForm<TreeItem>();
-      if (TreeItem.Id == 0) {
-         TreeItem.DateCreated = DateTime.Now;
-         db.Insert(TreeItem);
-      } else {
-         TreeItem.DateModified = DateTime.Now;
-         db.Update(TreeItem);
-      }
-   }
+  public TreeItem itm { get; set; }
+  public void OnGet() {
+    var id = qry("id").@int();
+    itm = db.selId<TreeItem>(id);
+  }
+  public void OnPost() {
+    itm = Request.GetForm<TreeItem>();
+    if (itm.id == 0) {
+      itm.crt = dte.Now;
+      itm.upd = itm.crt;
+      db.ins(itm);
+    } else {
+      itm.upd = dte.Now;
+      db.upd(itm);
+    }
+  }
 }
-public static class RequestExtensions
+public static class ReqExt
 {
-   public static T GetForm<T>(this HttpRequest req) {
-      var instance = Activator.CreateInstance<T>();
-      var formKeys = req.Form.Keys;
-      var typeFields = typeof(T).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-      foreach (var typeField in typeFields) {
-         var field = $"{nameof(TreeItem)}.{typeField.Name}";
-         if (!formKeys.Contains(field))
-            continue;
-         var str = req.Form[field].FirstOrDefault();
-         var typ = Nullable.GetUnderlyingType(typeField.FieldType);
-         var isNullable = typ != null;
-         object val = null;
-         if (isNullable && str.NotSet()) {
-            // null
-         } else {
-            val = Convert.ChangeType(str, typeField.FieldType);
-         }
-         typeField.SetValue(instance, val);
+  public static T GetForm<T>(this HttpRequest req) {
+    var inst = Activator.CreateInstance<T>();
+    var formKeys = req.Form.Keys;
+    var typeFields = typeof(T).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+    foreach (var typeField in typeFields) {
+      var field = $"{nameof(TreeItem)}.{typeField.Name}";
+      if (!formKeys.Contains(field))
+        continue;
+      var str = req.Form[field].FirstOrDefault();
+      var typ = Nullable.GetUnderlyingType(typeField.FieldType);
+      var isNullable = typ != null;
+      object val = null;
+      if (isNullable && str.NotSet()) {
+        // null
+      } else {
+        val = Convert.ChangeType(str, typeField.FieldType);
       }
-      return instance;
-   }
+      typeField.SetValue(inst, val);
+    }
+    return inst;
+  }
 }

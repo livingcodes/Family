@@ -11,8 +11,8 @@ public class Api : ControllerBase
   public IActionResult ins([FromBody]TreeItem itm) {
     if (itm is null)
       return BadRequest(new{msg="item is null"});
-    itm.DateCreated = dte.Now;
-    (itm.Id,_) = db.ins(itm);
+    itm.crt = dte.Now;
+    (itm.id,_) = db.ins(itm);
     return Ok(itm);
   }
 

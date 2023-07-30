@@ -23,11 +23,11 @@ public class TreeModel : BasePage
     str j = "[";
     foreach (var itm in itms) {
       j += "{";
-      j += $@"""{nameof(itm.ItmId)}"": {itm.ItmId}, ";
-      j += $@"""{nameof(itm.X)}"": {itm.X}, ";
-      j += $@"""{nameof(itm.Y)}"": {itm.Y}, ";
-      j += $@"""{nameof(itm.Title)}"": ""{itm.Title}"", ";
-      j += $@"""{nameof(itm.MbrId)}"": ""{itm.MbrId}""";
+      j += $@"""{nameof(itm.itmId)}"": {itm.itmId}, ";
+      j += $@"""{nameof(itm.x)}"": {itm.x}, ";
+      j += $@"""{nameof(itm.y)}"": {itm.y}, ";
+      j += $@"""{nameof(itm.title)}"": ""{itm.title}"", ";
+      j += $@"""{nameof(itm.mbrId)}"": ""{itm.mbrId}""";
       j += "},";
     }
     j = j.Substring(0, j.Length - 1); // todo: test no items
@@ -36,14 +36,14 @@ public class TreeModel : BasePage
   }
 
   str sql = @"
-SELECT ti.Id ItmId, ti.X, ti.Y, m.dn Title, ti.MemberId MbrId
+SELECT ti.Id itmId, ti.x, ti.y, m.dn title, ti.mbrId
 FROM Tree t
-JOIN TreeItem ti ON ti.TreeId = t.Id
-JOIN Member m ON m.id = ti.MemberId
+JOIN TreeItem ti ON ti.treeId = t.Id
+JOIN Member m ON m.id = ti.mbrId
 WHERE t.id = @id
 ";
   public class Item {
-    public int ItmId, X, Y, MbrId;
-    public str Title;
+    public int itmId, x, y, mbrId;
+    public str title;
   }
 }
