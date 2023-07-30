@@ -2,61 +2,61 @@
 @model Family.Pages.MemberModel
 <h1>Edit Member</h1>
 <form method="post">
-   <div>
-      <label asp-for="Member.Id">ID</label>
-      <input type="text" asp-for="Member.Id" readonly>
-   </div>
+  <div>
+    <label asp-for="mbr.id">ID</label>
+    <input type="text" asp-for="mbr.id" readonly>
+  </div>
 
-   <div>
-      <label asp-for="Member.FirstName">First Name</label>
-      <input type="text" asp-for="Member.FirstName" />
-   </div>
+  <div>
+    <label asp-for="mbr.fn">First Name</label>
+    <input type="text" asp-for="mbr.fn" />
+  </div>
 
-   <div>
-      <label asp-for="Member.MiddleName">Middle Name</label>
-      <input type="text" asp-for="Member.MiddleName" />
-   </div>
+  <div>
+    <label asp-for="mbr.mn">Middle Name</label>
+    <input type="text" asp-for="mbr.mn" />
+  </div>
 
-   <div>
-      <label asp-for="Member.LastName">Last Name</label>
-      <input type="text" asp-for="Member.LastName" />
-   </div>
+  <div>
+    <label asp-for="mbr.ln">Last Name</label>
+    <input type="text" asp-for="mbr.ln" />
+  </div>
 
-   <div>
-      <label asp-for="Member.DisplayName">Display Name</label>
-      <input type="text" asp-for="Member.DisplayName" />
-   </div>
+  <div>
+    <label asp-for="mbr.dn">Display Name</label>
+    <input type="text" asp-for="mbr.dn" />
+  </div>
 
-   <div>
-      <label asp-for="Member.Dob">DOB</label>
-      <input type="date" asp-for="Member.Dob" />
-   </div>
+  <div>
+    <label asp-for="mbr.dob">DOB</label>
+    <input type="date" asp-for="mbr.dob" />
+  </div>
 
-   <div>
-      <label asp-for="Member.Note">Note</label>
-      <textarea asp-for="Member.Note"></textarea>
-   </div>
+  <div>
+    <label asp-for="mbr.note">Note</label>
+    <textarea asp-for="mbr.note"></textarea>
+  </div>
 
-   <div>
-      <label asp-for="Member.DateCreated">Date Created</label>
-      <input asp-for="Member.DateCreated" readonly>
-   </div>
+  <div>
+    <label asp-for="mbr.crt">Date Created</label>
+    <input asp-for="mbr.crt" readonly>
+  </div>
 
-   <div>
-      <label asp-for="Member.DateModified">Date Modified</label>
-      <input asp-for="Member.DateModified" readonly>
-   </div>
+  <div>
+    <label asp-for="mbr.upd">Date Modified</label>
+    <input asp-for="mbr.upd" readonly>
+  </div>
 
-   <input type="submit" value="Save" />
+  <input type="submit" value="Save" />
 </form>
 
 <h2>Relationships</h2>
 <ul>
-   @foreach (var relationship in Model.Relationships) {
-   <li>
-      @relationship.Name1
-      @relationship.Type
-      @relationship.Name2
-   </li>
-   }
+  @foreach (var rln in Model.Relationships) {
+  <li>
+    @rln.Name1
+    @rln.Type
+    @rln.Name2
+  </li>
+  }
 </ul>

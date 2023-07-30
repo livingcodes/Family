@@ -1,33 +1,33 @@
 namespace Family.Pages;
 public class TreeModel : BasePage
 {
-  public List<Member> Members = new();
-  public Tree Tree = new();
-  public List<Item> Items = new();
-  public str Json;
+  public List<Member> mbrs = new();
+  public Tree tree = new();
+  public List<Item> itms = new();
+  public str jsn;
   public Vdn vdn = new();
 
   public void OnGet() {
-    Members = db.sel<Member>("ORDER BY Dob");
+    mbrs = db.sel<Member>("ORDER BY Dob");
     var treeId = qry("id").@int(1);
-    Tree = db.selId<Tree>(treeId);
-    if (Tree == null) {
+    tree = db.selId<Tree>(treeId);
+    if (tree == null) {
       vdn.err("Tree not found");
       return;
     }
-    Items = db.sel<Item>(sql, treeId);
-    Json = json(Items);
+    itms = db.sel<Item>(sql, treeId);
+    jsn = json(itms);
   }
 
-  str json(List<Item> items) {
+  str json(List<Item> itms) {
     str j = "[";
-    foreach (var item in items) {
+    foreach (var itm in itms) {
       j += "{";
-      j += $@"""{nameof(item.ItmId)}"": {item.ItmId}, ";
-      j += $@"""{nameof(item.X)}"": {item.X}, ";
-      j += $@"""{nameof(item.Y)}"": {item.Y}, ";
-      j += $@"""{nameof(item.Title)}"": ""{item.Title}"", ";
-      j += $@"""{nameof(item.MbrId)}"": ""{item.MbrId}""";
+      j += $@"""{nameof(itm.ItmId)}"": {itm.ItmId}, ";
+      j += $@"""{nameof(itm.X)}"": {itm.X}, ";
+      j += $@"""{nameof(itm.Y)}"": {itm.Y}, ";
+      j += $@"""{nameof(itm.Title)}"": ""{itm.Title}"", ";
+      j += $@"""{nameof(itm.MbrId)}"": ""{itm.MbrId}""";
       j += "},";
     }
     j = j.Substring(0, j.Length - 1); // todo: test no items
@@ -36,10 +36,10 @@ public class TreeModel : BasePage
   }
 
   str sql = @"
-SELECT ti.Id ItmId, ti.X, ti.Y, m.DisplayName Title, ti.MemberId MbrId
+SELECT ti.Id ItmId, ti.X, ti.Y, m.dn Title, ti.MemberId MbrId
 FROM Tree t
 JOIN TreeItem ti ON ti.TreeId = t.Id
-JOIN Member m ON m.Id = ti.MemberId
+JOIN Member m ON m.id = ti.MemberId
 WHERE t.Id = @Id
 ";
   public class Item {

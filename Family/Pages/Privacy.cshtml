@@ -1,13 +1,13 @@
 ﻿@page
 @model PrivacyModel
 <div>
-   <ul>
-      @foreach (var member in @Model.Members) {
-      <li>
-         <a href="#">
-            @member.DisplayName
-         </a>
-      </li>
-      }
-   </ul>
+  <ul>
+    @foreach (var mbr in @Model.mbrs) {
+    <li>
+      <a href="#">
+        @mbr.dn
+      </a>
+    </li>
+    }
+  </ul>
 </div>

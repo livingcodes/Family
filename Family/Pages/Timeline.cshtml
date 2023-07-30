@@ -1,16 +1,16 @@
 ﻿@page
 @model Family.Pages.TimelineModel
 <style>
-   .timeline{position:relative;}
-   .timeline div{position:absolute; width:120px; border-right:2px solid #ddd;}
-   .timeline div span{display:inline-block; width:60px; text-align:right;}
+  .timeline{position:relative;}
+  .timeline div{position:absolute; width:120px; border-right:2px solid #ddd;}
+  .timeline div span{display:inline-block; width:60px; text-align:right;}
 </style>
 <h1>Timeline</h1>
 <div class="timeline">
-   @foreach (var member in @Model.Members) {
-   <div style="top:@(member.Id)px">
-      @member.Dob?.ToString("yyyy") 
-      <span>@member.DisplayName</span>
-   </div>
-   }
+  @foreach (var mbr in @Model.mbrs) {
+  <div style="top:@(mbr.id)px">
+    @mbr.dob?.ToString("yyyy") 
+    <span>@mbr.dn</span>
+  </div>
+  }
 </div>

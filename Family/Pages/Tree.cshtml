@@ -5,17 +5,23 @@
 <div>
   <h2>Members</h2>
   <div class="members">
-    @foreach (var member in Model.Members) {
-    <div id="id@(member.Id)" draggable="true" onclick="add(this)">
-      @member.DisplayName
+    @foreach (var mbr in Model.mbrs) {
+    <div id="id@(mbr.id)"
+      draggable="true"
+      onclick="add(this)"
+    >
+      @mbr.dn
     </div>
     }
   </div>
 </div>
 <div>
-  <h2>@Model.Tree?.Title</h2>
+  <h2>@Model.tree?.Title</h2>
   <a href="javascript:save()" class="btn">Save</a>
-  <div id="tree" ondragover="over(event)" ondrop="drop(event)" data-id="@Model.Tree?.Id"></div>
+  <div id="tree"
+    ondragover="over(event)"
+    ondrop="drop(event)"
+    data-id="@Model.tree?.Id"></div>
 </div>
 
 @section css {
@@ -151,7 +157,7 @@ function post(url, obj) {
 var jsn = "";
 var api = new Api();
 window.onload = () => {
-  jsn = @Html.Raw(Model.Json);
+  jsn = @Html.Raw(Model.jsn);
   for (var i=0; i<jsn.length; i++) {
     var m = new Member(jsn[i].X, jsn[i].Y, jsn[i].Title, jsn[i].ItmId, jsn[i].MbrId);
     m.draw();

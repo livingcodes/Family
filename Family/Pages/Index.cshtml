@@ -1,20 +1,20 @@
 ﻿@page
 @model IndexModel
 @{
-   ViewData["Title"] = "Home page";
+  ViewData["Title"] = "Home page";
 }
 
 <div>
-   <h1>Family Members</h1>
-   <ul>
-      @foreach (var member in Model.Members) {
-      <li>
-         <a href="/member?id=@member.Id">
-            @member.DisplayName
-         </a>
-         &nbsp;@member.Dob?.Year
-         &nbsp;, @member.FirstName @member.MiddleName @member.LastName
-      </li>
-      }
-   </ul>
+  <h1>Family Members</h1>
+  <ul>
+    @foreach (var member in Model.mbrs) {
+    <li>
+      <a href="/member?id=@member.id">
+        @member.dn
+      </a>
+      &nbsp;@member.dob?.Year
+      &nbsp;, @member.fn @member.mn @member.ln
+    </li>
+    }
+  </ul>
 </div>
