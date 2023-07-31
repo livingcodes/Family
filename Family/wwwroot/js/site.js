@@ -1,4 +1,30 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿String.prototype.num = function(dft) {
+  var n = Number(this);
+  if (isNaN(n)) {
+    if (!dft)
+      dft = 0;
+    return dft;
+  } else
+    return n;
+}
+var ꙩ = sel => document.querySelector(sel);
+var ꙫ = sel => document.querySelectorAll(sel);
 
-// Write your JavaScript code.
+Element.prototype.atr = function(name, val) {
+  if (val)
+    this.setAttribute(name, val);
+  else
+    return this.getAttribute(name);
+}
+
+Element.prototype.dat = function(name) {
+  return this.getAttribute("data-"+name);
+}
+
+function post(url, obj) {
+  return fetch(url, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(obj)
+  })
+}

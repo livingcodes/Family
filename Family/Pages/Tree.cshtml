@@ -34,6 +34,7 @@
 }
 
 @section Scripts {
+<script src="/js/site.js"></script>
 <script>
 class Member {
   constructor(x, y, name, itmId, mbrId) {
@@ -44,22 +45,22 @@ class Member {
     this.mbrId = mbrId;
   }
   draw() {
-    var tree = document.getElementById('tree');
-    
     var div = document.createElement('div');
     div.style.left = this.x+'px';
     div.style.top = this.y+'px';
-    div.setAttribute('class', 'member');
-    div.setAttribute('draggable', 'true');
-    div.setAttribute('ondragstart', 'drag(event)');
-    div.setAttribute('ondblclick', 'dblclick(event)');
-    div.setAttribute('data-itmId', this.itmId);
-    div.setAttribute('data-mbrId', this.mbrId);
+    div.atr('class', 'member');
+    div.atr('draggable', 'true');
+    div.atr('ondragstart', 'drag(event)');
+    div.atr('ondblclick', 'dblclick(event)');
+    div.atr('data-itmId', this.itmId);
+    div.atr('data-mbrId', this.mbrId);
     
     var span = document.createElement('span');
     span.innerText = this.name;
     div.appendChild(span);
-    tree.appendChild(div);
+
+    var ᵉtree = ꙩ('#tree');
+    ᵉtree.appendChild(div);
   }
 }
 class Api
@@ -92,28 +93,30 @@ class Api
 function add(el) {
   var name = el.innerText;
   var mbrId = el.id.replace("id", "");
-  var member = new Member(10, 10, name, 0, mbrId);
-  member.draw();
+  var mbr = new Member(10, 10, name, 0, mbrId);
+  mbr.draw();
 }
 function drag(e) {
-  var itmId = e.target.attributes["data-itmId"].value;
+  var itmId = e.target.dat("itmId");
   console.log("drag itmId: " + itmId);
   e.dataTransfer.setData('text', itmId);
 }
 function drop(e) {
   var itmId = e.dataTransfer.getData('text');
-  console.log("drop itmId: " + itmId);
-  var el = document.querySelector('[data-itmId="'+itmId+'"]');
-  var rect = document.querySelector('#tree').getBoundingClientRect();
+  console.log(`drop itmId:${itmId}`);
+
+  var rect = ꙩ('#tree').getBoundingClientRect();
   var y = Math.round(rect.y);
   var x = Math.round(rect.x);
-  el.style.left = (e.x - x)+'px';
-  el.style.top = (e.y - y)+'px';
+
+  var ᵉitm = ꙩ(`[data-itmId="${itmId}"]`);
+  ᵉitm.style.left = (e.x - x)+'px';
+  ᵉitm.style.top = (e.y - y)+'px';
 }
 function dblclick(e) {
-  var id = e.target.getAttribute("data-itmId");
+  var id = e.target.dat("itmId");
   if (id == null)
-    id = e.target.parentElement.getAttribute("data-itmId");
+    id = e.target.parentElement.dat("itmId");
   console.log(id);
   if (id > 0)
     window.open("/treeitem?id="+id, "_blank");
@@ -122,37 +125,27 @@ function over(e) {
   e.preventDefault();
 }
 function save() {
-  var tree = document.getElementById("tree");
-  var treeId = tree.getAttribute("data-id");
-  treeId = Number(treeId);
-  var members = tree.querySelectorAll(".member");
+  var ᵉtree = ꙩ("#tree");
+  var treId = ᵉtree.atr("data-id").num();
+  var mbrs = tree.querySelectorAll(".member");
   var arr = [];
-  for (var i=0; i<members.length; i++) {
-    var itmId = members[i].getAttribute("data-itmId");
-    itmId = Number(itmId);
-    var mbrId = members[i].getAttribute("data-mbrId");
-    mbrId = Number(mbrId);
-    var x = members[i].style.left;
-    x = Number(x.replace("px", ""))
-    var y = members[i].style.top;
-    y = Number(y.replace("px", ""))
-    if (!itmId)
-      itmId = 0;
+  for (var i=0; i<mbrs.length; i++) {
+    var mbr = mbrs[i];
+    var itmId = mbr.dat("itmId").num();
+    var mbrId = mbr.dat("mbrId").num();
+    var x = mbr.style.left;
+    x = x.replace("px","").num();
+    var y = mbr.style.top;
+    y = y.replace("px", "").num();
     var itm = {"id":itmId, "x":x, "y":y};
     arr.push(itm);
     if (itmId == 0)
-      api.ins(treeId, mbrId, x, y);
+      api.ins(treId, mbrId, x, y);
+      // todo: upd itm id in dom
     else
       api.upd(itmId, x, y);
   }
   console.log(arr);
-}
-function post(url, obj) {
-  return fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(obj)
-  })
 }
 var jsn = "";
 var api = new Api();
