@@ -16,13 +16,13 @@ public class MemberModel : BasePage
       return;
     }
     Relationships = db.sel<Relationship>(@"
-      SELECT (m1.FirstName + ' ' + m1.LastName) Name1,
-        (m2.FirstName + ' ' + m2.LastName) Name2,
+      SELECT (m1.fn + ' ' + m1.ln) Name1,
+        (m2.fn + ' ' + m2.ln) Name2,
         r.[Type]
       FROM [Relationship] r
-      JOIN Member m1 ON m1.Id = r.MemberId
-      JOIN Member m2 ON m2.Id = r.RelationshipId
-      WHERE m1.Id = @Id OR m2.Id = @Id
+      JOIN Member m1 ON m1.id = r.MemberId
+      JOIN Member m2 ON m2.id = r.RelationshipId
+      WHERE m1.id = @id OR m2.id = @id
       ", id);
   }
   public class Relationship {
