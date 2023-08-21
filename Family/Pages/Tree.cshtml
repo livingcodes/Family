@@ -35,66 +35,15 @@
 
 @section Scripts {
 <script src="/js/site.js"></script>
+<script src="/js/member.js"></script>
+<script src="/js/api.js"></script>
 <script>
-class Member {
-  constructor(x, y, name, itmId, mbrId) {
-    this.x = x;
-    this.y = y;
-    this.name = name;
-    this.itmId = itmId;
-    this.mbrId = mbrId;
-  }
-  draw() {
-    var div = document.createElement('div');
-    div.style.left = this.x+'px';
-    div.style.top = this.y+'px';
-    div.atr('class', 'member');
-    div.atr('draggable', 'true');
-    div.atr('ondragstart', 'drag(event)');
-    div.atr('ondblclick', 'dblclick(event)');
-    div.atr('data-itmId', this.itmId);
-    div.atr('data-mbrId', this.mbrId);
-    
-    var span = document.createElement('span');
-    span.innerText = this.name;
-    div.appendChild(span);
-
-    var ᵉtree = ꙩ('#tree');
-    ᵉtree.appendChild(div);
-  }
-}
-class Api
-{
-  static dom = "https://localhost:7105/api/tree/";
-  ins(treeId, mbrId, x, y) {
-    post(`${Api.dom}ins`, {
-      treeId:treeId,
-      mbrId:mbrId,
-      x:x,
-      y:y
-    })
-    .then(res => {
-      console.log(res.status)
-      if (res.ok) {
-        return res.json();
-      }
-    })
-    .then(bdy => console.log(bdy));
-  }
-  upd(id, x, y) {
-    post(`${Api.dom}upd`, {
-      id:id,
-      x:x,
-      y:y
-    })
-    .then(res => console.log(res.statusText))
-  }
-}
 function add(el) {
   var name = el.innerText;
   var mbrId = el.id.replace("id", "");
+  // should Member be MbrTreItm
   var mbr = new Member(10, 10, name, 0, mbrId);
-  mbr.draw();
+  mbr.draw(document);
 }
 function drag(e) {
   var itmId = e.target.dat("itmId");
@@ -126,8 +75,8 @@ function over(e) {
 }
 function save() {
   var ᵉtree = ꙩ("#tree");
-  var treId = ᵉtree.atr("data-id").num();
-  var mbrs = tree.querySelectorAll(".member");
+  var treId = ᵉtree.dat("id").num();
+  var mbrs = ᵉtree.ꙫ(".member");
   var arr = [];
   for (var i=0; i<mbrs.length; i++) {
     var mbr = mbrs[i];
@@ -153,7 +102,7 @@ window.onload = () => {
   jsn = @Html.Raw(Model.jsn);
   for (var i=0; i<jsn.length; i++) {
     var m = new Member(jsn[i].x, jsn[i].y, jsn[i].title, jsn[i].itmId, jsn[i].mbrId);
-    m.draw();
+    m.draw(document);
   }
 }
 </script>

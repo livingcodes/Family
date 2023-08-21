@@ -1,4 +1,6 @@
-﻿String.prototype.num = function(dft) {
+﻿var log = txt => console.log(txt);
+
+String.prototype.num = function (dft) {
   var n = Number(this);
   if (isNaN(n)) {
     if (!dft)
@@ -9,6 +11,13 @@
 }
 var ꙩ = sel => document.querySelector(sel);
 var ꙫ = sel => document.querySelectorAll(sel);
+
+Element.prototype.ꙩ = function(sel) {
+  return this.querySelector(sel);
+}
+Element.prototype.ꙫ = function(sel) {
+  return this.querySelectorAll(sel);
+}
 
 Element.prototype.atr = function(name, val) {
   if (val)
