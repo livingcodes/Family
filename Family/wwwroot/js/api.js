@@ -20,6 +20,6 @@ class Api {
       x: x,
       y: y
     })
-      .then(res => console.log(res.statusText))
+    .then(res => console.log(res.statusText))
   }
 }

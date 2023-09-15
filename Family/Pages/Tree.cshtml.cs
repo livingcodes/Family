@@ -38,7 +38,7 @@ public class TreeModel : BasePage
 
   str sql = @"
 SELECT ti.Id itmId, ti.x, ti.y, m.dn title, ti.mbrId
-FROM Tree t
+FROM Tree t 
 JOIN TreeItem ti ON ti.treeId = t.Id
 JOIN Member m ON m.id = ti.mbrId
 WHERE t.id = @id
