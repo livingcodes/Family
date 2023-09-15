@@ -22,4 +22,7 @@ public class BasePage : PageModel {
 
   protected void red(str url) =>
     Response.Redirect(url);
+
+  protected str frm(str key) =>
+    Request.Form[key].FirstOrDefault();
 }
