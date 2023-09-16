@@ -28,27 +28,3 @@ public class TreeItemModel : BasePage
     }
   }
 }
-public static class ReqExt
-{
-  public static T GetForm<T>(this HttpRequest req, str boundVarName) {
-    var inst = Activator.CreateInstance<T>();
-    var formKeys = req.Form.Keys;
-    var typeFields = typeof(T).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-    foreach (var typeField in typeFields) {
-      var field = $"{boundVarName}.{typeField.Name}";
-      if (!formKeys.Contains(field))
-        continue;
-      var str = req.Form[field].FirstOrDefault();
-      var typ = Nullable.GetUnderlyingType(typeField.FieldType);
-      var isNullable = typ != null;
-      object val = null;
-      if (isNullable && str.NotSet()) {
-        // null
-      } else {
-        val = Convert.ChangeType(str, typeField.FieldType);
-      }
-      typeField.SetValue(inst, val);
-    }
-    return inst;
-  }
-}
