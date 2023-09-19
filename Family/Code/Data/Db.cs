@@ -30,4 +30,7 @@ public class Db : Basketcase.Db {
 
    public int upd<t>(t val) =>
       Update(val);
+
+   public int del<t>(int id) =>
+     Delete<t>(id);
 }
