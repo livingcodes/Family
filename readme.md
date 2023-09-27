@@ -5,7 +5,7 @@
 * Vdt already added
 * Maiden name
 * UI to add relationships (spouse, child, bio-parents, raised by - date range)
-* Member Date of death
+* Draggable immediately after adding to tree. Issue: Tree item does not have itmId yet since not saved to db.
 * Member.Cemetery
 * Visualize tree
 * Login + auth
@@ -14,4 +14,3 @@
 * Drag on top of self
 * Lines
 * Undo
-* 
