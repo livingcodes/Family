@@ -7,11 +7,15 @@
   <div class="members">
     @foreach (var mbr in Model.mbrs) {
     <div id="id@(mbr.id)"
+      title="Click to add family member to tree"
       draggable="true"
       onclick="add(this)"
     >
       @mbr.dn
     </div>
+    }
+    @if (Model.mbrs.Count == 0) {
+      <a href="/member">Add Members</a>
     }
   </div>
 </div>

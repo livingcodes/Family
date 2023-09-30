@@ -9,14 +9,23 @@ public class TreeModel : BasePage
 
   public void OnGet() {
     mbrs = db.sel<Member>("ORDER BY Dob");
-    var treeId = qry("id").@int(1);
-    tree = db.selId<Tree>(treeId);
-    if (tree == null) {
-      vdn.err("Tree not found");
-      return;
+    var treeId = qry("id").@int(-1);
+    if (treeId > 0) {
+      tree = db.selId<Tree>(treeId);
+      if (tree == null) {
+        vdn.err("Tree not found");
+        return;
+      }
+    }
+    else {
+      tree = db.sel<Tree>("ORDER BY crt").FirstOrDefault();
+      if (tree == null) {
+        tree = new(){ title="My Tree", crt=dte.Now, upd=dte.Now };
+        (tree.id, _) = db.ins(tree);
+      }
     }
 
-    itms = db.sel<Item>(sql, treeId);
+    itms = db.sel<Item>(sql, tree.id);
     jsn = json(itms);
   }
 
@@ -31,7 +40,8 @@ public class TreeModel : BasePage
       j += $@"""{nameof(itm.mbrId)}"": ""{itm.mbrId}""";
       j += "},";
     }
-    j = j.Substring(0, j.Length - 1); // todo: test no items
+    if (itms.Count > 0)
+      j = j.Substring(0, j.Length - 1); // todo: test no items
     j += "]";
     return j;
   }

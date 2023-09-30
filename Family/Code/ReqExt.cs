@@ -14,6 +14,11 @@ public static class ReqExt {
       object val = null;
       if (isNullable && str.NotSet()) {
         // null
+      } else if (isNullable 
+        && typeField.FieldType.FullName.Contains("Nullable")
+        && typeField.FieldType.FullName.Contains("DateTime")
+      ) {
+        val = dte.Parse(str);
       } else {
         val = Convert.ChangeType(str, typeField.FieldType);
       }

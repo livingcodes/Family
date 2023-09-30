@@ -8,7 +8,7 @@ public class Db : Basketcase.Db {
          // todo: switch default to serialized cache
          cache ?? new InMemoryCache(new MemoryCache(new MemoryCacheOptions()))
    ) { }
-
+   
    int hr = 60 * 60;
 
    public Basketcase.IDb Cache(string key) => Cache(key, 1 * hr);

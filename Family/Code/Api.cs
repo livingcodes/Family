@@ -12,6 +12,7 @@ public class Api : ControllerBase
     if (itm is null)
       return BadRequest(new{msg="item is null"});
     itm.crt = dte.Now;
+    itm.upd = itm.crt;
     (itm.id,_) = db.ins(itm);
     return Ok(itm);
   }
