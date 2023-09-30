@@ -51,20 +51,18 @@ function add(el) {
 }
 function drag(e) {
   var itmId = e.target.dat("itmId");
-  console.log("drag itmId: " + itmId);
-  e.dataTransfer.setData('text', itmId);
+  e.dataTransfer.setData('itmId', itmId);
+  e.dataTransfer.setData('offsetx', e.offsetX);
+  e.dataTransfer.setData('offsety', e.offsetY);
 }
 function drop(e) {
-  var itmId = e.dataTransfer.getData('text');
-  console.log(`drop itmId:${itmId}`);
-
-  var rect = ꙩ('#tree').getBoundingClientRect();
-  var y = Math.round(rect.y);
-  var x = Math.round(rect.x);
+  var itmId = e.dataTransfer.getData('itmId');
+  var offsetx = e.dataTransfer.getData('offsetx');
+  var offsety = e.dataTransfer.getData('offsety');
 
   var ᵉitm = ꙩ(`[data-itmId="${itmId}"]`);
-  ᵉitm.style.left = (e.x - x)+'px';
-  ᵉitm.style.top = (e.y - y)+'px';
+  ᵉitm.style.left = (e.offsetX - offsetx) +'px';
+  ᵉitm.style.top = (e.offsetY - offsety)+'px';
 }
 function dblclick(e) {
   var id = e.target.dat("itmId");

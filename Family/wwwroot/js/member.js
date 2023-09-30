@@ -16,6 +16,7 @@
     div.atr('ondblclick', 'dblclick(event)');
     div.atr('data-itmId', this.itmId);
     div.atr('data-mbrId', this.mbrId);
+    div.atr('title', 'Double click to edit');
 
     var span = doc.createElement('span');
     span.innerText = this.name;
