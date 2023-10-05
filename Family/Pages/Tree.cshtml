@@ -82,7 +82,9 @@ function save() {
   var arr = [];
   for (var i=0; i<mbrs.length; i++) {
     var mbr = mbrs[i];
-    var itmId = mbr.dat("itmId") == null ? 0 : mbr.dat("itmId").num();
+    var itmId = mbr.dat("itmId") == null || mbr.dat("itmId").num() > 999999
+      ? 0
+      : mbr.dat("itmId").num();
     var mbrId = mbr.dat("mbrId").num();
     var x = mbr.style.left;
     x = x.replace("px","").num();
