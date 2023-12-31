@@ -17,7 +17,7 @@
     div.atr('class', 'member');
     div.atr('draggable', 'true');
     div.atr('ondragstart', 'drag(event)');
-    div.atr('data-itmId', this.itmId);
+    div.atr('data-itmId', this.itmId); // todo: dat
     div.atr('data-mbrId', this.mbrId);
     if (!isNew) {
       div.atr('ondblclick', 'dblclick(event)');

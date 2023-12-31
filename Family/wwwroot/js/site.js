@@ -9,8 +9,15 @@ String.prototype.num = function (dft) {
   } else
     return n;
 }
+String.prototype.rem = function(str) {
+  return this.replace(str, "");
+}
 var ꙩ = sel => document.querySelector(sel);
 var ꙫ = sel => document.querySelectorAll(sel);
+
+Element.prototype.on = function (evNam, fn) {
+  return this.addEventListener(evNam, fn);
+}
 
 Element.prototype.ꙩ = function(sel) {
   return this.querySelector(sel);
