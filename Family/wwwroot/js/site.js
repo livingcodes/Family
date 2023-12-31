@@ -1,6 +1,6 @@
 ﻿var log = txt => console.log(txt);
 
-String.prototype.num = function (dft) {
+String.prototype.num = function(dft) {
   var n = Number(this);
   if (isNaN(n)) {
     if (!dft)
@@ -35,6 +35,13 @@ Element.prototype.atr = function(name, val) {
 
 Element.prototype.dat = function(name) {
   return this.getAttribute("data-"+name);
+}
+
+Array.prototype.ea = function(itm, i, fn) {
+  this.forEach(itm, i, fn);
+}
+NodeList.prototype.ea = function (itm, i, fn) {
+  this.forEach(itm, i, fn);
 }
 
 function post(url, obj) {

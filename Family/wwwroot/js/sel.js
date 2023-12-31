@@ -11,35 +11,29 @@
 
   width() { return this.end.x - this.start.x; }
   height() { return this.end.y - this.start.y; }
-  left() {
-    if (this.width() < 0)
-      return this.end.x;
-    else
-      return this.start.x;
-  }
-  top() {
-    return (this.height() < 0)
-      ? this.end.y
-      : this.start.y;
-  }
+  minX() { return Math.min(this.start.x, this.end.x); }
+  maxX() { return Math.max(this.start.x, this.end.x); }
+  minY() { return Math.min(this.start.y, this.end.y); }
+  maxY() { return Math.max(this.start.y, this.end.y); }
+  left() { return this.minX(); }
+  top() { return this.minY(); }
 
   draw(doc) {
-    return this.drawSelBox();
+    return this.drawLasso();
   }
 
-  drawSelBox() {
+  drawLasso() {
     var existed = true;
     if (!this.div) {
       existed = false;
       this.div = this.doc.createElement('div');
-      this.div.atr("id", "sel");
-      this.div.atr("class", "sel");
+      this.div.atr("id", "lasso");
+      this.div.atr("class", "lasso");
     }
     this.div.style.left = this.left() + 'px';
     this.div.style.top = this.top() + 'px';
     this.div.style.width = Math.abs(this.width()) + 'px';
     this.div.style.height = Math.abs(this.height()) + 'px';
-    
 
     if (this.isSelecting)
       this.div.style.borderColor = "lightblue";
@@ -65,7 +59,6 @@
       return;
 
     if (e.target == this.container) {
-      log("target is container");
       this.end.x = e.offsetX;
       this.end.y = e.offsetY;
     } else {
@@ -92,5 +85,33 @@
     }
 
     this.draw();
+
+    this.selMbrsInLasso();
+  }
+
+  selMbrsInLasso() {
+    var ᵉmbrs = ꙫ("#tree .member");
+    ᵉmbrs.ea((ᵉmbr, i) => {
+      if (this.isInLasso(ᵉmbr))
+        ᵉmbr.atr("class", "member sel");
+      else
+        ᵉmbr.atr("class", "member");
+    })
+  }
+
+  isInLasso(ᵉmbr) {
+    var lt = ᵉmbr.style.left.rem("px").num();
+    var rt = lt + ᵉmbr.offsetWidth;
+    var top = ᵉmbr.style.top.rem("px").num();
+    var btm = top + ᵉmbr.offsetHeight;
+    if (
+      lt >= this.minX() && lt <= this.maxX()
+      && rt >= this.minX() && rt <= this.maxX()
+      && top >= this.minY() && top <= this.maxY()
+      && btm >= this.minY() && btm <= this.maxY()
+    ) {
+      return true;
+    }
+    return false;
   }
 }
