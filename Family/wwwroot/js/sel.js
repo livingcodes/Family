@@ -37,8 +37,10 @@
 
     if (this.isSelecting)
       this.div.style.borderColor = "lightblue";
-    else
+    else {
       this.div.style.borderColor = "yellow";
+      this.div.style.display = "none";
+    }
 
     if (!existed)
       this.container.appendChild(this.div);
@@ -46,12 +48,18 @@
   }
 
   onStart(e) {
-    this.isSelecting = true;
-    // todo: if over member then exit
+    if (e.target == this.container) {
+      this.start.x = e.offsetX;
+      this.start.y = e.offsetY;
+      this.isSelecting = true;
+      if (this.div)
+        this.div.style.display = "block";
+    } else {
+
+    }
+
     log(`mouse down: offset x=${e.offsetX}, y=${e.offsetY}`);
     log(e);
-    this.start.x = e.offsetX;
-    this.start.y = e.offsetY;
   }
 
   onMove(e) {

@@ -58,12 +58,28 @@ function drag(e) {
 }
 function drop(e) {
   var itmId = e.dataTransfer.getData('itmId');
-  var offsetx = e.dataTransfer.getData('offsetx');
-  var offsety = e.dataTransfer.getData('offsety');
+  var offsetx = e.dataTransfer.getData('offsetx').num();
+  var offsety = e.dataTransfer.getData('offsety').num();
 
-  var ᵉitm = ꙩ(`[data-itmId="${itmId}"]`);
-  ᵉitm.style.left = (e.offsetX - offsetx) +'px';
-  ᵉitm.style.top = (e.offsetY - offsety)+'px';
+  var ᵉselMbrs = ꙫ('#tree .sel');
+  if (ᵉselMbrs.length > 0) {
+    var ᵉitm = ꙩ(`[data-itmId="${itmId}"]`); // item being dragged
+    var itmLt = ᵉitm.offsetLeft;
+    var itmTop = ᵉitm.offsetTop;
+
+    ᵉselMbrs.ea((ᵉmbr, i) => {
+      log(`offsetx=${offsetx}, offsety=${offsety}`);
+      log(`e.offsetX=${e.offsetX}, e.offsetY=${e.offsetY}`);
+      log(`ᵉmbr.offsetLeft=${ᵉmbr.offsetLeft}, ᵉmbr.offsetTop=${ᵉmbr.offsetTop}`);
+      ᵉmbr.style.left = (e.offsetX - (itmLt - ᵉmbr.offsetLeft) - offsetx) + 'px';
+      ᵉmbr.style.top = (e.offsetY - (itmTop - ᵉmbr.offsetTop) - offsety) + 'px';
+    })
+  }
+  else {
+    var ᵉitm = ꙩ(`[data-itmId="${itmId}"]`);
+    ᵉitm.style.left = (e.offsetX - offsetx)+'px';
+    ᵉitm.style.top = (e.offsetY - offsety)+'px';
+  }
 }
 function dblclick(e) {
   var id = e.target.dat("itmId");
@@ -107,15 +123,15 @@ var ᵉtree = ꙩ("#tree");
 var sel = new Sel(document, ᵉtree);
 
 window.onload = () => {
-  ᵉtree.on("mousedown", e => sel.onStart(e));
-  ᵉtree.on("mousemove", e => sel.onMove(e));
-  ᵉtree.on("mouseup", e => sel.onEnd(e));
-
   jsn = @Html.Raw(Model.jsn);
   for (var i=0; i<jsn.length; i++) {
     var m = new Member(jsn[i].x, jsn[i].y, jsn[i].title, jsn[i].itmId, jsn[i].mbrId);
     m.draw(document);
   }
+
+  ᵉtree.on("mousedown", e => sel.onStart(e));
+  ᵉtree.on("mousemove", e => sel.onMove(e));
+  ᵉtree.on("mouseup", e => sel.onEnd(e));
 }
 </script>
 <style>

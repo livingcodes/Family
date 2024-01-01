@@ -14,3 +14,4 @@
 * Drag on top of self
 * Lines
 * Undo
+* Don't leave lasso
