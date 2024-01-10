@@ -71,15 +71,27 @@ function drop(e) {
       log(`offsetx=${offsetx}, offsety=${offsety}`);
       log(`e.offsetX=${e.offsetX}, e.offsetY=${e.offsetY}`);
       log(`ᵉmbr.offsetLeft=${ᵉmbr.offsetLeft}, ᵉmbr.offsetTop=${ᵉmbr.offsetTop}`);
-      ᵉmbr.style.left = (e.offsetX - (itmLt - ᵉmbr.offsetLeft) - offsetx) + 'px';
-      ᵉmbr.style.top = (e.offsetY - (itmTop - ᵉmbr.offsetTop) - offsety) + 'px';
+      var left = snap(e.offsetX - (itmLt - ᵉmbr.offsetLeft) - offsetx);
+      var top = snap(e.offsetY - (itmTop - ᵉmbr.offsetTop) - offsety);
+      ᵉmbr.style.left = left+'px';
+      ᵉmbr.style.top = top+'px';
     })
   }
   else {
     var ᵉitm = ꙩ(`[data-itmId="${itmId}"]`);
-    ᵉitm.style.left = (e.offsetX - offsetx)+'px';
-    ᵉitm.style.top = (e.offsetY - offsety)+'px';
+    var lt = snap(e.offsetX - offsetx);
+    var top = snap(e.offsetY - offsety);
+    ᵉitm.style.left = lt+'px';
+    ᵉitm.style.top = top+'px';
   }
+}
+function snap(n) {
+  var s = 20;
+  var r = n % s;
+  if (r < s/2)
+    return n - r;
+  else
+    return n + (s - r);
 }
 function dblclick(e) {
   var id = e.target.dat("itmId");
