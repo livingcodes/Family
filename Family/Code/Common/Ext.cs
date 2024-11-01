@@ -1,5 +1,6 @@
 ﻿namespace Family.Common;
-public static class Extensions {
+public static class Ext
+{
    public static str str(this obj val, str ifNull) =>
       val == null
          ? ifNull
