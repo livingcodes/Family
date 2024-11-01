@@ -2,8 +2,8 @@
 using Basketcase;
 using System.Data;
 
-public class SqlConnectionFactory : IConnectionFactory {
-   public IDbConnection Create() =>
-      new System.Data.SqlClient.SqlConnection(
+public class SqlConnectionFactory : IConFct {
+   public IDbConnection Crt() =>
+      new Microsoft.Data.SqlClient.SqlConnection(
          "server=(LocalDb)\\MSSQLLocalDB; database=Family; trusted_connection=true;");
 }

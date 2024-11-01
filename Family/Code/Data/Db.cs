@@ -14,23 +14,23 @@ public class Db : Basketcase.Db {
    public Basketcase.IDb Cache(string key) => Cache(key, 1 * hr);
 
    public int exe(str sql, params obj[] prms) =>
-      Execute(sql, prms);
+      Exe(sql, prms);
 
    public List<t> sel<t>(str sql = null, params obj[] prms) =>
-      Select<t>(sql, prms);
+      Sel<t>(sql, prms);
 
    public t sel1<t>(str sql = null, params obj[] prms) =>
-      SelectOne<t>(sql, prms);
+      Sel1<t>(sql, prms);
 
    public t selId<t>(int id) =>
-      SelectById<t>(id);
+      SelById<t>(id);
 
    public (int id,int rows) ins<t>(t val) =>
-      Insert(val);
+      Ins(val);
 
    public int upd<t>(t val) =>
-      Update(val);
+      Upd(val);
 
    public int del<t>(int id) =>
-     Delete<t>(id);
+     Del<t>(id);
 }
